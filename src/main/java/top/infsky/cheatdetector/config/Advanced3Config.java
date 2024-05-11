@@ -58,16 +58,36 @@ public class Advanced3Config {
     public static boolean antiFallClutchMsg = false;
 
     @Config(category = ConfigCategory.ADVANCED3)
+    public static String fakelagMode = "LATENCY";
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagLatencyMode.class)
     public static boolean fakelagIncludeOutgoing = true;
-    @Config(category = ConfigCategory.ADVANCED3)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagLatencyMode.class)
     public static boolean fakelagIncludeIncoming = false;
     @Numeric(minValue = 0, maxValue = Integer.MAX_VALUE)
-    @Config(category = ConfigCategory.ADVANCED3)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagLatencyMode.class)
     public static int fakelagDelayMs = 100;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagLatencyMode.class)
+    public static boolean fakelagShowCount = false;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static double fakelagMaxTargetRange = 15.0;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static double fakelagStartRange = 6.0;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static double fakelagStopRange = 1.0;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static int fakelagMaxLagTicks = 100;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static boolean fakelagOnlyOutgoing = true;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static boolean fakelagStopOnHurt = true;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static int fakelagPauseTicksOnHurt = 10;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.FakelagDynamicMode.class)
+    public static boolean fakelagDebug = false;
+
     @Config(category = ConfigCategory.ADVANCED3)
     public static boolean fakelagAutoDisable = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean fakelagShowCount = false;
+
 
     @Config(category = ConfigCategory.ADVANCED3)
     public static double airPlaceReach = 4.5;
@@ -123,51 +143,65 @@ public class Advanced3Config {
     @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
     public static boolean scaffoldSilentRotation = true;
     @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
-    public static boolean scaffoldSilentKeepRotation = true;
+    public static boolean scaffoldKeepRotation = true;
     @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
     public static boolean scaffoldNoSprint = false;
+    @Numeric(minValue = 0, maxValue = 6, useSlider = true)
     @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
     public static int scaffoldExpend = 0;
     @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
     public static boolean scaffoldAutoSwitch = false;
     @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
+    public static boolean scaffoldSameY = false;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
     public static int scaffoldPlaceMinDelay = 1;
 
-    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.PASMode.class)
-    public static boolean velocityOnlyHurt = true;
-
+    @Numeric(minValue = 0, maxValue = 15, useSlider = true)
     @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraAttack = true;
+    public static double aimAssistRange = 6;
     @Config(category = ConfigCategory.ADVANCED3)
-    public static double killauraAttackReach = 3.0;
+    public static boolean aimAssistInteract = false;
+    @Numeric(minValue = -1, maxValue = 1, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistOffsetX = 0.024;
+    @Numeric(minValue = -1, maxValue = 1, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistOffsetY = -0.11;
+    @Numeric(minValue = -1, maxValue = 1, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistOffsetZ = -0.018;
+    @Numeric(minValue = 0, maxValue = 50)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistYawSpeed = 4.5;
+    @Numeric(minValue = 0, maxValue = 50)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistPitchSpeed = 2.0;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static boolean aimAssistStopOnTarget = false;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static boolean aimAssistNoise1 = false;
+    @Numeric(minValue = 0, maxValue = 5, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistYawRandom = 1.3;
+    @Numeric(minValue = 0, maxValue = 5, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistPitchRandom = 1.08;
+    @Numeric(minValue = 0, maxValue = 1, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistXZRandom = 0.08;
+    @Numeric(minValue = 0, maxValue = 1, useSlider = true)
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static double aimAssistYRandom = 0.1;
+    @Config(category = ConfigCategory.ADVANCED3, predicate = ConfigPredicate.AimAssistLegitMode.class)
+    public static boolean aimAssistNoise2 = false;
     @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraPreAim = true;
+    public static boolean aimAssistIncludeArmorStands = false;
     @Config(category = ConfigCategory.ADVANCED3)
-    public static double killauraPreAimReach = 6;
+    public static boolean aimAssistIncludeEntities = true;
     @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraSwitch = true;
+    public static boolean aimAssistIncludeAnyObjects = false;
     @Config(category = ConfigCategory.ADVANCED3)
-    public static int killauraSwitchDelay = 1;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraRayCast = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraLookView = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraNoRotation = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static double killauraMinCPS = 2;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static double killauraMaxCPS = 2;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraLegitAim = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraLegitAimNoise = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraIncludeArmorStands = true;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraIncludeEntities = false;
-    @Config(category = ConfigCategory.ADVANCED3)
-    public static boolean killauraIncludePlayers = false;
+    public static boolean aimAssistIncludePlayers = false;
 
     @Config(category = ConfigCategory.ADVANCED3)
     public static boolean handSpinPerfectSwing = false;
@@ -185,5 +219,17 @@ public class Advanced3Config {
             return NotebotUtils.NotebotMode.AnyInstrument;
         }
         return NotebotUtils.NotebotMode.ExactInstruments;
+    }
+
+    public static FakelagMode getFakelagMode() {
+        if (fakelagMode.equalsIgnoreCase("DYNAMIC")) {
+            return FakelagMode.DYNAMIC;
+        }
+        return FakelagMode.LATENCY;
+    }
+
+    public enum FakelagMode {
+        LATENCY,
+        DYNAMIC
     }
 }

@@ -23,6 +23,8 @@ public class ClickGUI extends Module {
     private static final @NotNull ConfigGui configGui = create(CheatDetector.MOD_ID, ConfigCategory.ANTICHEAT, CheatDetector.CONFIG_HANDLER.configManager);
 
     private boolean lastPASModeEnabled = false;
+    private Advanced3Config.FakelagMode lastFakelagMode = Advanced3Config.FakelagMode.LATENCY;
+    private boolean lastAimAssistInteract = false;
 
     public ClickGUI(@NotNull TRSelf player) {
         super("ClickGUI", player);
@@ -39,8 +41,12 @@ public class ClickGUI extends Module {
             update();
         }
 
-        if (lastPASModeEnabled != ModuleConfig.aaaPASModeEnabled) update();
+        if (lastPASModeEnabled != ModuleConfig.aaaPASModeEnabled
+                || lastFakelagMode != Advanced3Config.getFakelagMode()
+                || lastAimAssistInteract != Advanced3Config.aimAssistInteract) update();
         lastPASModeEnabled = ModuleConfig.aaaPASModeEnabled;
+        lastFakelagMode = Advanced3Config.getFakelagMode();
+        lastAimAssistInteract = Advanced3Config.aimAssistInteract;
     }
 
     @Contract("_, _, _ -> new")
