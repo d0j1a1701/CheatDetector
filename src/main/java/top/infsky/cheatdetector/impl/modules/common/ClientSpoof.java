@@ -9,7 +9,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundLoginPacket;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
-import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -35,18 +35,19 @@ public class ClientSpoof extends Module {
     @Override
     public boolean _onPacketSend(@NotNull Packet<ServerGamePacketListener> basePacket, Connection connection, PacketSendListener listener, CallbackInfo ci) {
         if (isDisabled()) return false;
-        if (basePacket instanceof ServerboundCustomPayloadPacket packet
-                && packet.getIdentifier() == ServerboundCustomPayloadPacket.BRAND) {
-            ci.cancel();
-            ((ConnectionAccessor) connection).sendPacket(
-                    new ServerboundCustomPayloadPacket(
-                            ServerboundCustomPayloadPacket.BRAND,
-                            new FriendlyByteBuf(Unpooled.buffer()).writeUtf(Advanced3Config.clientSpoofBrand)
-                    ), listener
-            );
-            customMsg("spoofed client: %s.".formatted(Advanced3Config.clientSpoofBrand));
-            return true;
-        }
+        // TODO: 我不会修
+        // if (basePacket instanceof ServerboundCustomPayloadPacket packet
+        //         && packet.getIdentifier() == ServerboundCustomPayloadPacket.BRAND) {
+        //     ci.cancel();
+        //     ((ConnectionAccessor) connection).sendPacket(
+        //             new ServerboundCustomPayloadPacket(
+        //                     ServerboundCustomPayloadPacket.BRAND,
+        //                     new FriendlyByteBuf(Unpooled.buffer()).writeUtf(Advanced3Config.clientSpoofBrand)
+        //             ), listener
+        //     );
+        //     customMsg("spoofed client: %s.".formatted(Advanced3Config.clientSpoofBrand));
+        //     return true;
+        // }
         return false;
     }
 

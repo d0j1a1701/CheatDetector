@@ -40,11 +40,11 @@ public abstract class MixinConnection {
     }
 
     @Inject(method = "doSendPacket", at = @At(value = "HEAD"), cancellable = true)
-    public void doSendPacket(Packet<?> packet, @Nullable PacketSendListener packetSendListener, ConnectionProtocol connectionProtocol, ConnectionProtocol connectionProtocol2, CallbackInfo ci) {
+    public void doSendPacket(Packet<?> packet, @Nullable PacketSendListener packetSendListener, CallbackInfo ci, boolean bl) {
         Rotation rotation = (Rotation) Rotation.getInstance();
 
         if (rotation != null) {
-            rotation.onFinallyPacketSend((ConnectionAccessor) this, packet, packetSendListener, connectionProtocol, connectionProtocol2, ci);
+            rotation.onFinallyPacketSend((ConnectionAccessor) this, packet, packetSendListener, ci, bl);
         }
     }
 
